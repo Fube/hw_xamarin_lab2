@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator.MainPage">
+
+    <StackLayout>
+        <Grid x:Name="CalcGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="resultText" FontSize="48"
+                   Grid.ColumnSpan="4" Text="0" HorizontalTextAlignment="Center"
+                    Background="LightBlue" />
+
+            <Button Text="AC" Grid.Row="1" Grid.Column="0" Clicked="HandleClear"/>
+            <Button Text="√" Grid.Row="1" Grid.Column="1" />
+            <Button Text="%" Grid.Row="1" Grid.Column="2" />
+            <Button Text="+" Grid.Row="1" Grid.Column="3" Clicked="HandleAddition" />
+            <Button Text="-" Grid.Row="2" Grid.Column="0" />
+            <Button Text="/" Grid.Row="2" Grid.Column="1" />
+            <Button Text="=" Grid.Row="2" Grid.Column="2" Clicked="HandleEqualsClick"/>
+
+        </Grid>
+    </StackLayout>
+
+</ContentPage>
