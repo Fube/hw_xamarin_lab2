@@ -48,7 +48,7 @@
         <Button Text="-" Grid.Row="3" Grid.Column="3" />
 
 
-        <Button Text="+" Grid.Row="4" Grid.Column="3" Clicked="HandleAddition" />
+        <Button Text="+" Grid.Row="4" Grid.Column="3" />
 
         <!-- Zero is custom fit -->
         <Button Text="0" Grid.Row="5" Grid.ColumnSpan="2" Clicked="HandleNumClick" />

@@ -60,7 +60,7 @@ namespace Calculator
                 Button btn = child as Button;
                 if(!int.TryParse(btn.Text, out _))
                 {
-                    btn.Clicked += (s, e) => model.Op = operations[btn.Text.ToString()];
+                    btn.Clicked += (s, e) => operations.TryGetValue(btn.Text, out model.Op);
                 }
             }
 
@@ -83,13 +83,6 @@ namespace Calculator
             model.SecondNum = Convert.ToDecimal(resultText.Text);
             resultText.Text = model?.Calculate().ToString() ?? "0";
             model.Reset();
-        }
-
-        private void HandleAddition(object sender, EventArgs e)
-        {
-            model.FirstNum = Convert.ToDecimal(resultText.Text);
-            model.Op = Model.ADD;
-            resultText.Text = "0";
         }
 
         private void HandleClear(object sender, EventArgs e)
