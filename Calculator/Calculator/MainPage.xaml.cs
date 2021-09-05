@@ -39,8 +39,6 @@ namespace Calculator
                     Text = i.ToString()
                 };
 
-                btn.Clicked += HandleNumClick;
-
                 int col = offset % 3;
                 int row = 4 - offset / 3;
 
@@ -59,9 +57,13 @@ namespace Calculator
                 child.SetDynamicResource(StyleProperty, column == 3 ? "Right" : "Left");
 
                 Button btn = child as Button;
-                if(!int.TryParse(btn.Text, out _))
+                if (!int.TryParse(btn.Text, out _))
                 {
                     btn.Clicked += HandleOpClick;
+                }
+                else
+                {
+                    btn.Clicked += HandleNumClick;
                 }
             }
 

@@ -53,7 +53,7 @@
         <Button Text="+" Grid.Row="4" Grid.Column="3" />
 
         <!-- Zero is custom fit -->
-        <Button Text="0" Grid.Row="5" Grid.ColumnSpan="2" Clicked="HandleNumClick" />
+        <Button Text="0" Grid.Row="5" Grid.ColumnSpan="2" />
         <Button Text="X2" Grid.Row="5" Grid.Column="2" />
         <Button Text="=" Grid.Row="5" Grid.Column="3" Clicked="HandleEqualsClick"/>
 
