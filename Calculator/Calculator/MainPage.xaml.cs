@@ -16,15 +16,18 @@ namespace Calculator
         {
             model = new Model();
             InitializeComponent();
-            for(var i = 0; i < 10; i++)
+
+            for (int i = 1; i < 10; i++)
             {
+                int j = i; // Get constant ref
+
                 Button btn = new Button
                 {
-                    Text = i.ToString()
+                    Text = (10 - j).ToString()
                 };
-                int j = i;
-                btn.Clicked += (e, s) => HandleNumClick(j);
-                CalcGrid.Children.Add(btn, i % 4, 3 + i / 4);
+                
+                btn.Clicked += (e, s) => HandleNumClick(10 - j);
+                CalcGrid.Children.Add(btn, j % 4, 3 + j / 4);
             }
 
         }
