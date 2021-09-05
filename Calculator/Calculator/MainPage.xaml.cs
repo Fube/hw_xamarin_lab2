@@ -27,7 +27,9 @@ namespace Calculator
                 };
                 
                 btn.Clicked += (e, s) => HandleNumClick(10 - j);
-                CalcGrid.Children.Add(btn, j % 4, 3 + j / 4);
+
+                // Element, Column, Row
+                CalcGrid.Children.Add(btn, (j - 1) % 3, 3 + j / 4);
             }
 
         }
