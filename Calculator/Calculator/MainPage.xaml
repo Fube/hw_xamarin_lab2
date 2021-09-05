@@ -33,10 +33,12 @@
         </Grid.ColumnDefinitions>
 
         <Label x:Name="resultText" FontSize="48"
-                   Grid.ColumnSpan="4" Text="0"
-                   HorizontalTextAlignment="Right"
-                   VerticalTextAlignment="Center"
-                    Background="LightBlue" />
+               Grid.ColumnSpan="4" 
+               Text="0"
+               HorizontalTextAlignment="Right"
+               VerticalTextAlignment="Center"
+               Background="LightBlue" 
+               />
 
         <Button Text="AC" Grid.Row="1" Grid.Column="0" Clicked="HandleClear"/>
         <Button Text="√" Grid.Row="1" Grid.Column="1" />

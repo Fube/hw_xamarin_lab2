@@ -17,18 +17,19 @@ namespace Calculator
         {
 
             model = new Model();
-            operations = new Dictionary<string, Operation>
-            {
-                { "+", Model.ADD },
-                { "-", Model.SUB },
-                { "*", Model.MUL },
-                { "÷", Model.DIV },
+            operations = new Dictionary<string, Operation>();
 
-                { "√", Model.SQR },
-                { "%", Model.PRC },
-            };
+            operations["+"] = Model.ADD;
+            operations["-"] = Model.SUB;
+            operations["*"] = Model.MUL;
+            operations["÷"] = Model.DIV;
+            operations["√"] = Model.SQR;
+            operations["%"] = Model.PRC;
+            operations["X2"] = Model.DBL;
 
             InitializeComponent();
+            BindingContext = model;
+
             for (int i = 1; i < 10; i++)
             {
                 int offset = i - 1;
@@ -52,7 +53,7 @@ namespace Calculator
 
             foreach (var child in CalcGrid.Children)
             {
-                if (child.GetType() != typeof(Button)) continue;
+                if (!(child is Button)) continue;
 
                 int column = Grid.GetColumn(child);
                 child.SetDynamicResource(StyleProperty, column == 3 ? "Right" : "Left");
@@ -60,17 +61,50 @@ namespace Calculator
                 Button btn = child as Button;
                 if(!int.TryParse(btn.Text, out _))
                 {
-                    btn.Clicked += (s, e) => operations.TryGetValue(btn.Text, out model.Op);
+                    btn.Clicked += HandleOpClick;
                 }
             }
 
 
         }
 
+        private void HandleOpClick(object sender, EventArgs e)
+        {
+            if (!(sender is Button)) return;
+            Button btn = sender as Button;
+
+            bool valid = operations.TryGetValue(btn.Text, out Operation tempOp);
+            bool isPerc = btn.Text.Equals("%");
+
+            if (!valid) return;
+
+            model.Op = tempOp;
+
+            if(isPerc)
+            {
+                model.SecondNum = LabelAsDecimal;
+                resultText.Text = model?.Calculate().ToString() ?? "0";
+                return;
+            }
+            else
+            {
+                model.FirstNum = LabelAsDecimal;
+            }
+
+            if(model.Op is SingleArgumentOperation)
+            {
+                resultText.Text = model?.Calculate().ToString() ?? "0";
+                model.Reset();
+                return;
+            }
+
+            resultText.Text = "0";
+        }
+
         private void HandleNumClick(object sender, EventArgs e)
         {
             int num = Convert.ToInt32((sender as Button).Text);
-            if(resultText.Text.Equals("0"))
+            if (resultText.Text.Equals("0"))
             {
                 resultText.Text = num.ToString();
                 return;
@@ -80,7 +114,7 @@ namespace Calculator
 
         private void HandleEqualsClick(object sender, EventArgs e)
         {
-            model.SecondNum = Convert.ToDecimal(resultText.Text);
+            model.SecondNum = LabelAsDecimal;
             resultText.Text = model?.Calculate().ToString() ?? "0";
             model.Reset();
         }
@@ -90,5 +124,7 @@ namespace Calculator
             model.Reset();
             resultText.Text = "0";
         }
+
+        private decimal LabelAsDecimal => Convert.ToDecimal(resultText.Text);
     }
 }

@@ -19,7 +19,18 @@ namespace Calculator
         public decimal? FirstNum;
         public decimal? SecondNum;
         public decimal? Result;
-        public Operation Op;
+
+        private Operation _op;
+        private Operation _lastOp;
+        public Operation Op
+        {
+            set
+            {
+                _lastOp = _op;
+                _op = value;
+            }
+            get => _op;
+        }
 
         public Model()
         {
@@ -41,6 +52,8 @@ namespace Calculator
             if(Op == PRC)
             {
                 SecondNum = Op.Run(FirstNum, SecondNum);
+                Op = _lastOp;
+                return SecondNum;
             }
 
             Result = Op.Run(FirstNum, SecondNum);

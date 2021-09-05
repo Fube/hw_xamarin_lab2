@@ -13,7 +13,6 @@ namespace Calculator
         public override decimal Run(decimal? a, decimal? b)
         {
             if (a == null) return 0;
-            if (b != null) throw new Exception("Only one argument expected, got two");
 
             return Logic.Invoke(a.Value, 0);
         }
