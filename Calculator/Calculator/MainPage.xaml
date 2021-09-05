@@ -3,36 +3,58 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Calculator.MainPage">
 
-    <StackLayout>
-        <Grid x:Name="CalcGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="36" />
+        </Style>
+        <Style x:Key="Left" TargetType="Button">
+            <Setter Property="Background" Value="#808080"/>
+        </Style>
+        <Style x:Key="Right" TargetType="Button">
+            <Setter Property="Background" Value="#add8e6"/>
+        </Style>
+    </ContentPage.Resources>
 
-            <Label x:Name="resultText" FontSize="48"
-                   Grid.ColumnSpan="4" Text="0" HorizontalTextAlignment="Center"
+    <Grid x:Name="CalcGrid" Padding="5" ColumnSpacing="5" RowSpacing="5">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="resultText" FontSize="48"
+                   Grid.ColumnSpan="4" Text="0"
+                   HorizontalTextAlignment="Right"
+                   VerticalTextAlignment="Center"
                     Background="LightBlue" />
 
-            <Button Text="AC" Grid.Row="1" Grid.Column="0" Clicked="HandleClear"/>
-            <Button Text="√" Grid.Row="1" Grid.Column="1" />
-            <Button Text="%" Grid.Row="1" Grid.Column="2" />
-            <Button Text="+" Grid.Row="1" Grid.Column="3" Clicked="HandleAddition" />
-            <Button Text="-" Grid.Row="2" Grid.Column="0" />
-            <Button Text="/" Grid.Row="2" Grid.Column="1" />
-            <Button Text="=" Grid.Row="2" Grid.Column="2" Clicked="HandleEqualsClick"/>
+        <Button Text="AC" Grid.Row="1" Grid.Column="0" Clicked="HandleClear"/>
+        <Button Text="√" Grid.Row="1" Grid.Column="1" />
+        <Button Text="%" Grid.Row="1" Grid.Column="2" />
+        <Button Text="÷" Grid.Row="1" Grid.Column="3" />
 
-        </Grid>
-    </StackLayout>
+        <Button Text="*" Grid.Row="2" Grid.Column="3" />
+
+        <Button Text="-" Grid.Row="3" Grid.Column="3" />
+
+
+        <Button Text="+" Grid.Row="4" Grid.Column="3" Clicked="HandleAddition" />
+
+        <!-- Zero is custom fit -->
+        <Button Text="0" Grid.Row="5" Grid.ColumnSpan="2" Clicked="HandleNumClick" />
+        <Button Text="X2" Grid.Row="5" Grid.Column="2" />
+        <Button Text="=" Grid.Row="5" Grid.Column="3" Clicked="HandleEqualsClick"/>
+
+    </Grid>
 
 </ContentPage>
