@@ -18,9 +18,11 @@ namespace Calculator
             InitializeComponent();
             for(var i = 0; i < 10; i++)
             {
-                Button btn = new Button();
-                btn.Text = i.ToString();
-                var j = i;
+                Button btn = new Button
+                {
+                    Text = i.ToString()
+                };
+                int j = i;
                 btn.Clicked += (e, s) => HandleNumClick(j);
                 CalcGrid.Children.Add(btn, i % 4, 3 + i / 4);
             }
