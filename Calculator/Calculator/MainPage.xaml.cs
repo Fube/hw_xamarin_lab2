@@ -57,13 +57,13 @@ namespace Calculator
                 child.SetDynamicResource(StyleProperty, column == 3 ? "Right" : "Left");
 
                 Button btn = child as Button;
-                if (!int.TryParse(btn.Text, out _))
-                {
-                    btn.Clicked += HandleOpClick;
-                }
-                else
+                if (int.TryParse(btn.Text, out _))
                 {
                     btn.Clicked += HandleNumClick;
+                }
+                else if (!btn.Text.Equals("=") && !btn.Text.Equals("AC"))
+                {
+                    btn.Clicked += HandleOpClick;
                 }
             }
 
@@ -105,9 +105,16 @@ namespace Calculator
         private void HandleNumClick(object sender, EventArgs e)
         {
             int num = Convert.ToInt32((sender as Button).Text);
-            if (resultText.Text.Equals("0") || model.Result != null)
+
+            if(model.Result != null)
             {
                 model.Reset();
+                resultText.Text = num.ToString();
+                return;
+            }
+
+            if (resultText.Text.Equals("0"))
+            {
                 resultText.Text = num.ToString();
                 return;
             }
