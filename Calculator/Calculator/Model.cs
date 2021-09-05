@@ -42,6 +42,7 @@ namespace Calculator
             FirstNum = SecondNum = null;
             Op = null;
             Result = null;
+            _lastOp = null;
         }
 
         public decimal? Calculate()

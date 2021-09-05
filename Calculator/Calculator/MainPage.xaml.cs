@@ -96,7 +96,6 @@ namespace Calculator
             if(model.Op is SingleArgumentOperation)
             {
                 resultText.Text = model?.Calculate().ToString() ?? "0";
-                model.Reset();
                 return;
             }
 
@@ -106,8 +105,9 @@ namespace Calculator
         private void HandleNumClick(object sender, EventArgs e)
         {
             int num = Convert.ToInt32((sender as Button).Text);
-            if (resultText.Text.Equals("0"))
+            if (resultText.Text.Equals("0") || model.Result != null)
             {
+                model.Reset();
                 resultText.Text = num.ToString();
                 return;
             }
@@ -118,7 +118,6 @@ namespace Calculator
         {
             model.SecondNum = LabelAsDecimal;
             resultText.Text = model?.Calculate().ToString() ?? "0";
-            model.Reset();
         }
 
         private void HandleClear(object sender, EventArgs e)
